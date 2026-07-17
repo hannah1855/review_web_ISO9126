@@ -1,0 +1,266 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f4f6fb;
+  --foreground: #0f172a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── Animated page mesh background ─── */
+.bg-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% -10%, rgba(99, 102, 241, 0.18), transparent 50%),
+    radial-gradient(ellipse 70% 50% at 90% 10%, rgba(168, 85, 247, 0.14), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(59, 130, 246, 0.1), transparent 50%),
+    linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.bg-mesh__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.bg-mesh__orb--1 {
+  width: 420px;
+  height: 420px;
+  top: -8%;
+  left: -5%;
+  background: radial-gradient(circle, #818cf8 0%, transparent 70%);
+  animation: float-a 14s ease-in-out infinite;
+}
+
+.bg-mesh__orb--2 {
+  width: 380px;
+  height: 380px;
+  top: 20%;
+  right: -8%;
+  background: radial-gradient(circle, #c084fc 0%, transparent 70%);
+  animation: float-b 18s ease-in-out infinite;
+}
+
+.bg-mesh__orb--3 {
+  width: 320px;
+  height: 320px;
+  bottom: 5%;
+  left: 30%;
+  background: radial-gradient(circle, #67e8f9 0%, transparent 70%);
+  animation: float-c 16s ease-in-out infinite;
+}
+
+.bg-mesh__orb--4 {
+  width: 260px;
+  height: 260px;
+  bottom: 20%;
+  right: 20%;
+  background: radial-gradient(circle, #f9a8d4 0%, transparent 70%);
+  animation: float-a 20s ease-in-out infinite reverse;
+}
+
+@keyframes float-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, 30px) scale(1.08); }
+  66% { transform: translate(-20px, 50px) scale(0.95); }
+}
+
+@keyframes float-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(-50px, 40px) scale(1.1); }
+  70% { transform: translate(30px, -30px) scale(0.92); }
+}
+
+@keyframes float-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, -40px) scale(1.12); }
+}
+
+/* ─── Gradient shimmer text ─── */
+.text-shimmer {
+  background: linear-gradient(
+    110deg,
+    #4f46e5 0%,
+    #a855f7 25%,
+    #06b6d4 50%,
+    #a855f7 75%,
+    #4f46e5 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+/* ─── Hero animated gradient ─── */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    #4f46e5 0%,
+    #7c3aed 30%,
+    #a855f7 55%,
+    #6366f1 75%,
+    #4f46e5 100%
+  );
+  background-size: 300% 300%;
+  animation: hero-shift 10s ease infinite;
+}
+
+@keyframes hero-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ─── Floating particles ─── */
+.particle {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.35);
+  animation: particle-rise linear infinite;
+  pointer-events: none;
+}
+
+@keyframes particle-rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.4; }
+  100% {
+    transform: translateY(-120px) scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* ─── Pulse ring ─── */
+.pulse-ring {
+  animation: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(99, 102, 241, 0); }
+}
+
+/* ─── Glow card hover ─── */
+.card-glow {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.card-glow:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow:
+    0 20px 40px -12px rgba(99, 102, 241, 0.25),
+    0 0 0 1px rgba(99, 102, 241, 0.1);
+}
+
+/* ─── Soft glass ─── */
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ─── Animated underline nav ─── */
+.nav-pill {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+/* ─── Score bar fill ─── */
+.score-fill {
+  transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── Bounce icon ─── */
+.icon-bounce {
+  display: inline-block;
+  animation: icon-bounce 2.5s ease-in-out infinite;
+}
+
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* ─── Spinner ─── */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+.spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* ─── Blob morph for AI ─── */
+.blob {
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  animation: blob-morph 8s ease-in-out infinite;
+}
+
+@keyframes blob-morph {
+  0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+  34% { border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%; }
+  67% { border-radius: 50% 50% 30% 70% / 60% 30% 70% 40%; }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .bg-mesh__orb,
+  .text-shimmer,
+  .hero-gradient,
+  .particle,
+  .pulse-ring,
+  .icon-bounce,
+  .spin-slow,
+  .blob {
+    animation: none !important;
+  }
+
+  .card-glow:hover {
+    transform: none;
+  }
+}
+
+@media print {
+  header,
+  .print\:hidden,
+  .bg-mesh {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+  }
+
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+}
